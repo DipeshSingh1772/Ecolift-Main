@@ -1,60 +1,72 @@
 package com.example.ecolift.MainActivities
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.ecolift.R
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ecolift.Data_Classes.CreateTravllerResponse
+import com.example.ecolift.Retrofit.ServiceBuilder
+import com.example.ecolift.Retrofit.SessionManager
+import com.example.ecolift.databinding.FragmentBooksRideHistoryBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [BooksRideHistory.newInstance] factory method to
- * create an instance of this fragment.
- */
 class BooksRideHistory : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    private var _binding: FragmentBooksRideHistoryBinding? = null
+    private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_books_ride_history, container, false)
+        _binding = FragmentBooksRideHistoryBinding.inflate(inflater,container,false)
+        createTravller()
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment BooksRideHistory.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            BooksRideHistory().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+
+    fun createTravller() {
+
+        val retrofit = ServiceBuilder()
+        val retrofitBuilder = retrofit.retrofitBuilder
+        val sessionManager = SessionManager(this.requireContext())
+        binding.progressBarForList.visibility = View.VISIBLE
+
+        retrofitBuilder.getHistory(token = "Bearer ${sessionManager.fetchAuthToken()}")
+            .enqueue(object : Callback<List<CreateTravllerResponse>> {
+
+                override fun onResponse(
+                    call: Call<List<CreateTravllerResponse>>,
+                    response: Response<List<CreateTravllerResponse>>
+                ) {
+                    if(response.isSuccessful){
+                        binding.progressBarForList.visibility = View.GONE
+                        val responseBody = response.body()!!
+                        binding.allPostedrideRecylerView.layoutManager = LinearLayoutManager(requireContext())
+                        val adapter = BookingHistoryRecylerView()
+                        adapter.updateAll(responseBody)
+                        binding.allPostedrideRecylerView.adapter = adapter
+                        Log.d("succes", responseBody.toString())
+                    }
+                    else{
+                        binding.progressBarForList.visibility = View.GONE
+                        Toast.makeText(requireContext(), "Something Wrong", Toast.LENGTH_SHORT).show()
+                    }
                 }
-            }
+
+                override fun onFailure(call: Call<List<CreateTravllerResponse>>, t: Throwable) {
+                    binding.progressBarForList.visibility = View.GONE
+                    Toast.makeText(requireContext(), "Connection Problem", Toast.LENGTH_SHORT).show()
+                }
+
+            })
+
     }
+
 }

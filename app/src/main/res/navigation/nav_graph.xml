@@ -11,21 +11,23 @@
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
-            android:id="@+id/action_mainFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
+            android:id="@+id/action_mainFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
-        android:id="@+id/searchFragment"
-        android:label="fragment_search" >
+        android:id="@+id/profileFragment"
+        android:name="com.example.ecolift.MainActivities.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
         <action
-            android:id="@+id/action_searchFragment_to_availableRideList"
-            app:destination="@id/availableRideList" />
+            android:id="@+id/action_profileFragment_to_profileSettingFragment"
+            app:destination="@id/profileSettingFragment" />
     </fragment>
     <fragment
-        android:id="@+id/availableRideList"
-        android:name="com.example.ecolift.BookRideActivities.AvailableRideList"
-        android:label="fragment_available_ride_list"
-        tools:layout="@layout/fragment_available_ride_list" />
+        android:id="@+id/profileSettingFragment"
+        android:name="com.example.ecolift.MainActivities.ProfileSettingFragment"
+        android:label="fragment_profile_setting"
+        tools:layout="@layout/fragment_profile_setting" />
 
 
 </navigation>

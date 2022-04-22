@@ -26,7 +26,7 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="2"
+                    android:layout_weight="3"
                     android:layout_height="match_parent"
                     android:text="Profile"
                     android:textColor="@color/white"
@@ -34,17 +34,16 @@
                     android:layout_marginStart="20dp"
                     android:gravity="center|left"/>
 
-                <Button
-                    android:id="@+id/logout_btn"
+                <ImageView
+                    android:id="@+id/setting_btn"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/menu_profile_icon"
                     android:fontFamily="@font/julius_sans_one"
                     android:text="LOGOUT"
                     android:textStyle="bold"/>
-
 
 
             </LinearLayout>
@@ -95,10 +94,7 @@
                         android:textColor="@color/white"
                         android:layout_margin="5dp"/>
 
-
                 </LinearLayout>
-
-
 
                 <ProgressBar
                     android:id="@+id/progressBar"
@@ -110,11 +106,7 @@
 
             </LinearLayout>
 
-
-
         </LinearLayout>
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -123,6 +115,17 @@
             android:orientation="vertical"
             android:gravity="center"
             android:background="@drawable/post_recyclerview_background">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/alegreya_sans_sc_medium"
+                android:text="Your Created Rides"
+                android:textSize="16dp"
+                android:textColor="#303030"
+                android:textStyle="bold"/>
 
             <ProgressBar
                 android:id="@+id/progressBarForList"
@@ -148,17 +151,8 @@
 
             </LinearLayout>
 
-
-
-
         </LinearLayout>
 
-
-
-
-
     </LinearLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

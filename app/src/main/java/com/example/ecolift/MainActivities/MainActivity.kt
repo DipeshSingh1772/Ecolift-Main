@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
 
     private val homeFragment = MainFragment()
     private val profileFragment = ProfileFragment()
+    private val historyFragment = BooksRideHistory()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity() {
             when(it.itemId){
                 R.id.home -> replaceFragment(homeFragment)
                 R.id.profile -> replaceFragment(profileFragment)
+                R.id.history -> replaceFragment(historyFragment)
             }
             true
         }
