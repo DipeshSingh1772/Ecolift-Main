@@ -1,5 +1,6 @@
 package com.example.ecolift.MainActivities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -38,14 +39,8 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         getProfile()
         getAllPostedRide()
-
         binding.settingBtn.setOnClickListener {
-            val fragment: Fragment = ProfileSettingFragment()
-            val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
-            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment_container, fragment)
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
+            startActivity(Intent(this.requireContext(), ProfileMenuActivity::class.java))
         }
     }
 
