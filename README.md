@@ -1,7 +1,7 @@
 # Ecolift
 
-    An online pool cab booking Android application that give people a user interactive interface to post and
-    book rides.
+An online pool cab booking Android application that give people a user interactive interface to post and
+book rides.
 
   - ViewModel
   - Room Persistance library
