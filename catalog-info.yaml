@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: Ecolift-Main
+  annotations:
+    github.com/project-slug: DipeshSingh1772/Ecolift-Main
+spec:
+  type: other
+  lifecycle: unknown
+  owner: Dipesh
